@@ -13,6 +13,23 @@ def test_incomes_create(api_session):
     )
 
 
+def test_incomes_create_with_dates(api_session):
+    incomes = resources.Incomes(api_session)
+    incomes.session.post = MagicMock()
+    incomes.create("fake-link-uuid", date_from="2021-01-01", date_to="2021-01-02")
+    incomes.session.post.assert_called()
+    incomes.session.post.assert_called_with(
+        "/api/incomes/",
+        data={
+            "link": "fake-link-uuid",
+            "date_from": "2021-01-01",
+            "date_to": "2021-01-02",
+            "save_data": True,
+        },
+        raise_exception=False,
+    )
+
+
 def test_income_resume(api_session):
     incomes = resources.Incomes(api_session)
     incomes.session.patch = MagicMock()
