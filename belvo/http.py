@@ -74,10 +74,10 @@ class APISession:
 
         return r.json()
 
-    def list(self, endpoint: str, params: Dict = None) -> Generator:
+    def list(self, endpoint: str, params: Dict = None, timeout: int = 5) -> Generator:
         url = "{}{}".format(self.url, endpoint)
         while True:
-            data = self._get(url, params=params)
+            data = self._get(url, params=params, timeout=timeout)
             for result in data["results"]:
                 yield result
 
