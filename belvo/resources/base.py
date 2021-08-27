@@ -13,9 +13,9 @@ class Resource:
     def session(self) -> APISession:
         return self._session
 
-    def list(self, **kwargs) -> Generator:
+    def list(self, timeout: int = 5, **kwargs) -> Generator:
         endpoint = self.endpoint
-        return self.session.list(endpoint, params=kwargs)
+        return self.session.list(endpoint, timeout=timeout, params=kwargs)
 
     def get(self, id: str, **kwargs) -> Dict:
         return self.session.get(self.endpoint, id, params=kwargs)
