@@ -13,7 +13,7 @@ class Resource:
     def session(self) -> APISession:
         return self._session
 
-    def list(self, timeout: int = 5, **kwargs) -> Generator:
+    def list(self, *, timeout: int = 5, **kwargs) -> Generator:
         endpoint = self.endpoint
         return self.session.list(endpoint, timeout=timeout, params=kwargs)
 
