@@ -6,8 +6,8 @@ help:  ## Shows this help message
 
 ##@ 🛠  Testing and development
 
-.PHONY: test
-test: ## Run all or specific tests. Arguments: name=NAME-OF-TEST will run a specific test
+.PHONY: test-unit
+test-unit: ## Run all or specific unit tests. Arguments: name=NAME-OF-TEST will run a specific test
 	./scripts/run-tests.sh $(name)
 
 .PHONY: linting
