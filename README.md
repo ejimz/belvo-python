@@ -72,7 +72,7 @@ client = Client("your-secret-key-id", "your-secret-key", "sandbox")
 
 # Register a link 
 link = client.Links.create(
-    institution="banamex",
+    institution="erebor_mx_retail",
     username="johndoe",
     password="supersecret",
     access_mode=AccessMode.SINGLE
@@ -105,7 +105,7 @@ try:
     # Register a link
     link = client.Links.create(
         access_mode=AccessMode.SINGLE,
-        institution="banamex_mx_retail",
+        institution="erebor_mx_retail",
         username="<username>",
         password="<pass>",
         raise_exception=True, # Set this optional paramter
