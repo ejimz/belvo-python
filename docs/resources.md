@@ -104,7 +104,7 @@ deleted on cascade.
 In order to make easier to find a `Link` (or many of them), it is possible to 
 filter the results.
 
-If not filters are provided, you will get all `Links` that you have registered.
+If no filters are provided, you will get all `Links` that you have registered.
 
 **Method:**
 ```python
@@ -230,7 +230,7 @@ on cascade.
 In order to make easier to find a `Account` (or many of them), it is possible to 
 filter the results.
 
-If not filters are provided, you will get all `Accounts` that you have registered.
+If no filters are provided, you will get all `Accounts` that you have registered.
 
 **Method:**
 ```python
@@ -522,6 +522,78 @@ incomes = client.incomes.list(
 The `.list()` method yields a `Generator`, you will have to iterate  over it or cast it to `List` or `Tuple`.
 
 
+## Recurring Expenses
+Extract the recurring expenses of the last year from a given link.
+
+### Fetching recurring expenses
+To fetch recurring expenses you will make use of the `.create()` method, the process will retrieve the detected recurring expenses in the data available from the bank institution. You **must** provide a `Link`.
+
+**Method:**
+```python
+def create(
+    self,
+    link: str,
+    *,
+    token: str = None,
+    save_data: bool = True,
+    raise_exception: bool = False,
+    **kwargs: Dict,
+) -> Union[List[Dict], Dict]
+```
+
+**Example:**
+```python
+# Fetch recurring expenses for a Link
+recurring_expenses = client.RecurringExpenses.create("44d309dc-24c6-4734-99e0-22c595fee2c2")
+
+# Fetch recurring expenses for a Link with and timeout after 15 seconds
+recurring_expenses = client.RecurringExpenses.create(
+    "44d309dc-24c6-4734-99e0-22c595fee2c2",
+    timeout=15
+)
+```
+
+### Deleting recurring expenses
+A `Recurring Expense` is persisted into our database after you fetch it, if you want, you can delete it at any time.
+
+**Method:**
+```python
+def delete(recurring_expense: str) -> bool:
+    ...
+```
+
+**Example:**
+```python
+client.RecurringExpenses.delete("44d309dc-24c6-4734-99e0-22c595fee2c2")
+
+```
+
+### List and filtering
+In order to make easier to find a `Recurring Expense` (or many of them), it is possible to filter the results.
+
+If no filters are provided, you will get all `Recurring Expenses` that you have registered.
+
+**Method:**
+```python
+def list(**kwargs) -> Generator:
+    ...
+```
+
+**Example:**
+```python
+# Retrieve all recurring expenses (no filter given)
+recurring_expenses = client.RecurringExpenses.list()
+
+# Retrieve recurring expenses for a specific account
+recurring_expenses = client.RecurringExpenses.list(
+    account="44d309dc-24c6-4734-99e0-22c595fee2c2"
+)
+```
+
+**:warning: Warning:**
+
+The `.list()` method yields a `Generator`, you will have to iterate  over it or cast it to `List` or `Tuple`.
+
 
 ## Owners
 Personal information available from an account owner.
@@ -572,7 +644,7 @@ client.Owners.delete("e29e8def-1959-4cb8-892d-d3bf65a5d9f3")
 In order to make easier to find a `Owner` (or many of them), it is possible to 
 filter the results.
 
-If not filters are provided, you will get all `owners` that you have registered.
+If no filters are provided, you will get all `owners` that you have registered.
 
 **Method:**
 ```python

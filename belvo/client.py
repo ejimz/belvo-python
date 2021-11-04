@@ -28,6 +28,7 @@ class Client:
         self._incomes = resources.Incomes(self.session)
         self._owners = resources.Owners(self.session)
         self._invoices = resources.Invoices(self.session)
+        self._recurring_expenses = resources.RecurringExpenses(self.session)
         self._tax_returns = resources.TaxReturns(self.session)
         self._tax_status = resources.TaxStatus(self.session)
         self._tax_compliance_status = resources.TaxComplianceStatus(self.session)
@@ -65,6 +66,10 @@ class Client:
     @property
     def Invoices(self):
         return self._invoices
+
+    @property
+    def RecurringExpenses(self):
+        return self._recurring_expenses
 
     @property
     def TaxReturns(self):

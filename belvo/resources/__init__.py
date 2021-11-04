@@ -5,6 +5,7 @@ from belvo.resources.institutions import Institutions  # noqa
 from belvo.resources.invoices import Invoices  # noqa
 from belvo.resources.links import Links  # noqa
 from belvo.resources.owners import Owners  # noqa
+from belvo.resources.recurring_expenses import RecurringExpenses  # noqa
 from belvo.resources.statements import Statements  # noqa
 from belvo.resources.tax_compliance_status import TaxComplianceStatus  # noqa
 from belvo.resources.tax_returns import TaxReturns  # noqa
