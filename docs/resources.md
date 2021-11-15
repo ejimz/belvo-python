@@ -30,14 +30,14 @@ Links an end-user identity with a bank entity.
 
 ### Registering a new Link
 
-To register a `Link` you **must** provide: _institution, username and password_. 
+To register a `Link` you **must** provide: _institution, username and password_.
 Optionally you can also provide a _token_ (for MFA) and a _secret_ (that will
 be used to safely encrypt and decrypt the password).
 
 The `Link` will only be registered if the provided credentials are valid and will
 be validated by authenticating against the specified bank.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -80,7 +80,7 @@ link = client.Links.create("sat_mx_fiscal", "johndoe", "a-password", certificate
 ```
 
 ### Deleting links
-A `Link` is persisted into our database when you register it, if you want you can 
+A `Link` is persisted into our database when you register it, if you want you can
 delete it at any time and data related to the `Link` will be also deleted.
 
 **Method:**
@@ -101,7 +101,7 @@ When deleting a `Link`, all _accounts_, _transactions_ and _owners_ data will be
 deleted on cascade.
 
 ### List and filtering
-In order to make easier to find a `Link` (or many of them), it is possible to 
+In order to make easier to find a `Link` (or many of them), it is possible to
 filter the results.
 
 If no filters are provided, you will get all `Links` that you have registered.
@@ -131,10 +131,10 @@ cast it to `List` or `Tuple`.
 
 ### Updating an existing Link
 
-A `Link` is persisted into our database when you register it, if you want you can 
+A `Link` is persisted into our database when you register it, if you want you can
 update it with new data, like a password change.
 
-**Method:** 
+**Method:**
 
 ```python
 def update(
@@ -170,7 +170,7 @@ def token(link: str, scopes: str) -> Union[List[Dict], Dict]:
 
 **Example:**
 ```python
-link_token = client.Links.token(link="b91835f5-6f83-4d9b-a0ad-a5a249f18b7c", scopes="read_links")
+link_token = client.Links.token(link="b91835f5-6f83-4d9b-a0ad-a5a249f28b7c", scopes="read_links")
 ```
 
 ## Accounts
@@ -178,13 +178,13 @@ Bank accounts available for a link.
 
 ### Fetching accounts
 To fetch accounts you will make use of the `.create()` method, the process will
-retrieve all account data available from the bank institution. You **must** 
+retrieve all account data available from the bank institution. You **must**
 provide a `Link`.
 
-If the account already exists in our records, only its balance and `collected_at` 
+If the account already exists in our records, only its balance and `collected_at`
 will be updated.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -200,13 +200,13 @@ accounts = client.Accounts.create("b91835f5-6f83-4d9b-a0ad-a5a249f18b7c")
 
 # Fetch accounts for a Link with and timeout after 15 seconds
 accounts = client.Accounts.create(
-    "b91835f5-6f83-4d9b-a0ad-a5a249f18b7c", 
+    "b91835f5-6f83-4d9b-a0ad-a5a249f18b7c",
     timeout=15
 )
 ```
 
 ### Deleting accounts
-An `Account` is persisted into our database after you fetch it, if you want you 
+An `Account` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -223,11 +223,11 @@ client.Accounts.delete("161a5e4d-67f5-4760-ae4f-c1fe85cb20ca")
 
 **:warning: Warning:**
 
-When deleting an `Account`, all transactions_ and _owners_ data will be deleted 
+When deleting an `Account`, all transactions_ and _owners_ data will be deleted
 on cascade.
 
 ### List and filtering
-In order to make easier to find a `Account` (or many of them), it is possible to 
+In order to make easier to find a `Account` (or many of them), it is possible to
 filter the results.
 
 If no filters are provided, you will get all `Accounts` that you have registered.
@@ -257,20 +257,20 @@ The `.list()` method yields a `Generator`, you will have to iterate  over it or
 cast it to `List` or `Tuple`.
 
 ## Transactions
-Bank transactions made in a bank account. 
+Bank transactions made in a bank account.
 
 ### Fetching transactions
 To fetch transactions you will make use of the `.create()` method, the process will
-retrieve all transaction data available from the bank institution. You **must** 
-provide a `Link` and a date range defined by `date_from` and `date_to`. 
+retrieve all transaction data available from the bank institution. You **must**
+provide a `Link` and a date range defined by `date_from` and `date_to`.
 
-Optionally, if `Account` is given it will only fetch transaction matching 
+Optionally, if `Account` is given it will only fetch transaction matching
 the account.
 
 If the account retrieved in the transaction doesn't exist, it will be created
 with the transaction.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -299,13 +299,13 @@ transactions = client.Transactions.create(
 transactions = client.Transactions.create(
     "b91835f5-6f83-4d9b-a0ad-a5a249f18b7c",
     "2019-07-01",
-    date_to="2019-07-31",    
+    date_to="2019-07-31",
     timeout=15
 )
 ```
 
 ### Deleting transactions
-A `Transaction` is persisted into our database after you fetch it, if you want you 
+A `Transaction` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -321,7 +321,7 @@ client.Transactions.delete("b92935e6-fb9a-4c2f-9d7c-3e42165421d6")
 ```
 
 ### List and filtering
-In order to make easier to find a `Transaction` (or many of them), it is possible to 
+In order to make easier to find a `Transaction` (or many of them), it is possible to
 filter the results.
 
 If no filters are provided, you will get all `transactions` that you have registered.
@@ -355,17 +355,17 @@ cast it to `List` or `Tuple`.
 Account balances at a given time.
 
 ### Fetching balances
-To fetch balances you will make use of the `.create()` method. You will get the 
-account balance at the end of every day within the specified date range. You **must** 
-provide a `Link` and a date range defined by `date_from` and `date_to`. 
+To fetch balances you will make use of the `.create()` method. You will get the
+account balance at the end of every day within the specified date range. You **must**
+provide a `Link` and a date range defined by `date_from` and `date_to`.
 
-Optionally, if `Account` is given it will only fetch transaction matching 
+Optionally, if `Account` is given it will only fetch transaction matching
 the account.
 
 If the account retrieved in the transaction doesn't exist, it will be created
 with the transaction.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -394,13 +394,13 @@ balances = client.Balances.create(
 balances = client.Balances.create(
     "b91835f5-6f83-4d9b-a0ad-a5a249f18b7c",
     "2019-07-01",
-    date_to="2019-07-31",    
+    date_to="2019-07-31",
     timeout=15
 )
 ```
 
 ### Deleting balances
-A `Balance` is persisted into our database after you fetch it, if you want you 
+A `Balance` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -416,7 +416,7 @@ client.Balances.delete("b92935e6-fb9a-4c2f-9d7c-3e42165421d6")
 ```
 
 ### List and filtering
-In order to make easier to find a `Balance` (or many of them), it is possible to 
+In order to make easier to find a `Balance` (or many of them), it is possible to
 filter the results.
 
 If no filters are provided, you will get all `balances` that you have registered.
@@ -479,7 +479,7 @@ incomes = client.Incomes.create(
 ```
 
 ### Deleting incomes
-An `income` is persisted into our database after you fetch it, if you want you 
+An `income` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -495,7 +495,7 @@ client.Incomes.delete("e29e8def-1959-4cb8-892d-d3bf65a5d9f3")
 ```
 
 ### List and filtering
-In order to make easier to find an `Income` (or many of them), it is possible to 
+In order to make easier to find an `Income` (or many of them), it is possible to
 filter the results.
 
 If not filters are provided, you will get all `incomes` that you have registered.
@@ -600,10 +600,10 @@ Personal information available from an account owner.
 
 ### Fetching owners
 To fetch owners you will make use of the `.create()` method, the process will
-retrieve all owner data available from the bank institution. You **must** 
+retrieve all owner data available from the bank institution. You **must**
 provide a `Link`.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -625,7 +625,7 @@ owners = client.Owners.create(
 ```
 
 ### Deleting owners
-A `owner` is persisted into our database after you fetch it, if you want you 
+A `owner` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -641,7 +641,7 @@ client.Owners.delete("e29e8def-1959-4cb8-892d-d3bf65a5d9f3")
 ```
 
 ### List and filtering
-In order to make easier to find a `Owner` (or many of them), it is possible to 
+In order to make easier to find a `Owner` (or many of them), it is possible to
 filter the results.
 
 If no filters are provided, you will get all `owners` that you have registered.
@@ -676,11 +676,11 @@ List of invoices issued for a given account
 
 ### Fetching invoices
 To fetch invoices you will make use of the `.create()` method, the process will
-retrieve all invoices available from the institution. You **must** 
-provide a `Link`, a date range defined by `date_from` and `date_to` and invoice 
-`type`. 
+retrieve all invoices available from the institution. You **must**
+provide a `Link`, a date range defined by `date_from` and `date_to` and invoice
+`type`.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -710,7 +710,7 @@ invoices = client.Invoices.create(
 ```
 
 ### Deleting invoices
-A `Invoice` is persisted into our database after you fetch it, if you want you 
+A `Invoice` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -748,10 +748,10 @@ List of tax returns for a given account
 
 ### Fetching tax returns
 To fetch tax returns you will make use of the `.create()` method, the process will
-retrieve all tax returns available from the institution. You **must** 
-provide a `Link`, a year range defined by `year_from` and `year_to`. 
+retrieve all tax returns available from the institution. You **must**
+provide a `Link`, a year range defined by `year_from` and `year_to`.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -790,7 +790,7 @@ tax_returns = client.TaxReturns.create(
 ```
 
 ### Deleting tax returns
-A `TaxReturn` is persisted into our database after you fetch it, if you want you 
+A `TaxReturn` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -828,10 +828,10 @@ Tax compliance status for a given `Link`
 
 ### Fetching tax compliance status
 To fetch tax compliance status you will make use of the `.create()` method. The process will
-retrieve the tax compliance status from the institution. You **must** 
-provide a `Link`. 
+retrieve the tax compliance status from the institution. You **must**
+provide a `Link`.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -861,7 +861,7 @@ tax_compliance_status = client.TaxComplianceStatus.create(
 ```
 
 ### Deleting tax compliance status
-A `TaxComplianceStatus` is persisted into our database after you fetch it, if you want you 
+A `TaxComplianceStatus` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -900,10 +900,10 @@ Tax situation for a given `Link`
 
 ### Fetching tax status
 To fetch tax status you will make use of the `.create()` method, the process will
-retrieve the tax status from the institution. You **must** 
-provide a `Link`. 
+retrieve the tax status from the institution. You **must**
+provide a `Link`.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -933,7 +933,7 @@ tax_status = client.TaxReturns.create(
 ```
 
 ### Deleting tax status
-A `TaxStatus` is persisted into our database after you fetch it, if you want you 
+A `TaxStatus` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -971,10 +971,10 @@ List of monthly statements for a given account
 
 ### Fetching statements
 To fetch statements you will make use of the `.create()` method, the process will
-retrieve all monthly statements available from the institution. You **must** 
-provide a `Link`, an `Account` and a month defined by `year` and `month`. 
+retrieve all monthly statements available from the institution. You **must**
+provide a `Link`, an `Account` and a month defined by `year` and `month`.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
@@ -1003,11 +1003,11 @@ statements = client.Statements.create(
 ```
 
 ### Resume fetch statements
-Most institutions use 2FA to verify client's identity. The `.resume()` method 
+Most institutions use 2FA to verify client's identity. The `.resume()` method
 is needed in those cases to provide the required `token` during the login.
 `session`, `link` and `account` parameters will be needed to resume the process.
 
-**Method:** 
+**Method:**
 
 ```python
 def resume(
@@ -1023,7 +1023,7 @@ def resume(
 ```
 
 ### Deleting statements
-A `Statement` is persisted into our database after you fetch it, if you want you 
+A `Statement` is persisted into our database after you fetch it, if you want you
 can delete it at any time.
 
 **Method:**
@@ -1057,13 +1057,13 @@ The `.list()` method yields a `Generator`, you will have to iterate  over it or
 cast it to `List` or `Tuple`.
 
 ## WidgetToken
-A widget token that contains `access` and `refresh` keys. Use `access` to connect the Belvo Widget to your app. 
+A widget token that contains `access` and `refresh` keys. Use `access` to connect the Belvo Widget to your app.
 
 ### Creating a new token
 To create a new widget token you need to use the `.create()` method, the process will
-request a new token to our API. This token has a limited scope and a short time to live. 
+request a new token to our API. This token has a limited scope and a short time to live.
 
-**Method:** 
+**Method:**
 
 ```python
 def create(
