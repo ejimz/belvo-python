@@ -1,0 +1,63 @@
+version: 2.1
+
+jobs:
+  test:
+    machine:
+      image: ubuntu-2004:202107-02
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: Install Python
+          command: |
+            sudo add-apt-repository ppa:deadsnakes/ppa
+            sudo apt-get update
+            sudo apt-get install python3.6
+            sudo apt-get install python3.7
+            sudo apt-get install python3.8
+            sudo apt-get install python3.9
+      - run:
+          name: Install deps
+          command: |
+            sudo python3.8 -m pip install tox coveralls
+      - run:
+          name: Run tox
+          command: tox
+      - run:
+          name: Run coveralls
+          command: coveralls -v
+  deploy-to-pypi:
+    docker:
+      - image: circleci/python:3.6.4
+    steps:
+      - checkout
+      - run:
+          name: Install deps
+          command: |
+            sudo pip install --upgrade pip
+            sudo pip install --upgrade setuptools wheel twine
+      - run:
+          name: Deploy to PyPI
+          command: |
+            python setup.py sdist bdist_wheel
+            twine upload --username __token__ --password $PYPI_TOKEN dist/*
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /v.*/
+          context:
+            - shared
+      - deploy-to-pypi:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          context:
+            - shared

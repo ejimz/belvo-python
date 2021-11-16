@@ -2,7 +2,7 @@
 <p align="center">
     <a href="https://pypi.org/project/belvo-python/"><img alt="PyPI" src="https://img.shields.io/pypi/v/belvo-python?style=for-the-badge"></a>
     <a href="https://pypistats.org/packages/belvo-python"><img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/belvo-python?style=for-the-badge"></a>
-    <a href="https://travis-ci.com/belvo-finance/belvo-python"><img alt="Travis (.com)" src="https://img.shields.io/travis/com/belvo-finance/belvo-python/master?style=for-the-badge"></a>
+    <a href="https://app.circleci.com/pipelines/github/belvo-finance/belvo-python"><img alt="CircleCI (.com)" src="https://img.shields.io/travis/com/belvo-finance/belvo-python/master?style=for-the-badge"></a>
     <a href="https://coveralls.io/github/belvo-finance/belvo-python"><img alt="Coveralls github" src="https://img.shields.io/coveralls/github/belvo-finance/belvo-python?style=for-the-badge"></a>
     <a href="https://github.com/psf/black"><img alt="Coveralls github" src="https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge"></a>
 </p>
