@@ -122,6 +122,7 @@ else:
 ## 🐍 Development
 
 To release a new version of the SDK to PyPI:
+- Create a new branch from master.
 - Use `make new-version major|minor|patch` to bump a new version.
 - Create a new pull request for the new version.
 - Once the new version is merged in `master`, create a `tag` matching the new version.
