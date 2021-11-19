@@ -36,6 +36,7 @@ def test_client_will_raise_exception_when_login_has_failed():
         "Incomes",
         "Invoices",
         "RecurringExpenses",
+        "RiskInsights",
         "TaxReturns",
         "Statements",
         "WidgetToken",

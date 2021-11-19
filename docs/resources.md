@@ -595,6 +595,79 @@ recurring_expenses = client.RecurringExpenses.list(
 The `.list()` method yields a `Generator`, you will have to iterate  over it or cast it to `List` or `Tuple`.
 
 
+## Risk Insights
+Extract risk insights from a link
+
+### Fetching risk insights
+To fetch risk insights you will make use of the `.create()` method, the process will retrieve risk insights from the data available from the bank institution. You **must** provide a `Link`.
+
+**Method:**
+```python
+def create(
+    self,
+    link: str,
+    *,
+    token: str = None,
+    save_data: bool = True,
+    raise_exception: bool = False,
+    **kwargs: Dict,
+) -> Union[List[Dict], Dict]
+```
+
+**Example:**
+```python
+# Fetch risk insights for a Link
+risk_insights = client.RiskInsights.create("44d309dc-24c6-4734-99e0-22c595fee2c2")
+
+# Fetch risk insights for a Link with and timeout after 15 seconds
+risk_insights = client.RiskInsights.create(
+    "44d309dc-24c6-4734-99e0-22c595fee2c2",
+    timeout=15
+)
+```
+
+### Deleting a RiskInsights object
+A `RiskInsights` object with is persisted into our database after you fetch it, if you want, you can delete it at any time.
+
+**Method:**
+```python
+def delete(risk_insights: str) -> bool:
+    ...
+```
+
+**Example:**
+```python
+client.RiskInsights.delete("44d309dc-24c6-4734-99e0-22c595fee2c2")
+
+```
+
+### List and filtering
+In order to make easier to find a `RiskInsights` object (or many of them), it is possible to filter the results.
+
+If no filters are provided, you will get all `RiskInsights` objects that you have registered.
+
+**Method:**
+```python
+def list(**kwargs) -> Generator:
+    ...
+```
+
+**Example:**
+```python
+# Retrieve all risk insights (no filter given)
+risk_insights = client.RiskInsights.list()
+
+# Retrieve risk_insights for a specific link
+RiskInsights = client.RiskInsights.list(
+    link="44d309dc-24c6-4734-99e0-22c595fee2c2"
+)
+```
+
+**:warning: Warning:**
+
+The `.list()` method yields a `Generator`, you will have to iterate  over it or cast it to `List` or `Tuple`.
+
+
 ## Owners
 Personal information available from an account owner.
 
