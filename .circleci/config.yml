@@ -31,6 +31,7 @@ jobs:
       - image: circleci/python:3.6.4
     steps:
       - checkout
+      - env
       - run:
           name: Install deps
           command: |
@@ -55,9 +56,6 @@ workflows:
           requires:
             - test
           filters:
-            branches:
-              only:
-                - master
             tags:
               only: /^v.*/
           context:
