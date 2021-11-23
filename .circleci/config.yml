@@ -31,11 +31,6 @@ jobs:
       - image: circleci/python:3.6.4
     steps:
       - checkout
-      - run:
-          name: Testing stuff
-          command: |
-            echo << pipeline.git.branch >>
-            echo << pipeline.git.tag >>
       - when:
           condition:
             and:
@@ -68,7 +63,8 @@ workflows:
           requires:
             - test
           filters:
-            tags:
-              only: /v.*/
+            branches:
+              only:
+                - master
           context:
             - shared
